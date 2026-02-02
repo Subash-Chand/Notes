@@ -2,250 +2,460 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Love Confirmation ❤️</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
 
-body{
-    min-height:100vh;
-    background:linear-gradient(135deg,#ff6b9d,#ff8fab,#ffb8d9);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-family:Arial Rounded MT Bold,Arial,sans-serif;
-    overflow:hidden;
+body {
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+    background: linear-gradient(135deg, #ff6b9d, #ff8fab, #ffb8d9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial Rounded MT Bold, Arial, sans-serif;
+    overflow: hidden;
+    touch-action: manipulation;
+    padding: 10px;
 }
 
 /* particles */
-.particles{position:fixed;width:100%;height:100%;pointer-events:none}
-.particle{
-    position:absolute;
-    width:8px;height:8px;
-    background:rgba(255,255,255,.6);
-    border-radius:50%;
-    animation:float 8s linear infinite;
+.particles {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
 }
-@keyframes float{
-    0%{transform:translateY(100vh);opacity:0}
-    10%,90%{opacity:1}
-    100%{transform:translateY(-100px);opacity:0}
+
+.particle {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    animation: float 8s linear infinite;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(100vh);
+        opacity: 0;
+    }
+    10%, 90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100px);
+        opacity: 0;
+    }
 }
 
 /* container */
-.container{
-    background:rgba(255,255,255,.95);
-    border-radius:25px;
-    padding:35px;
-    width:90%;
-    max-width:550px;
-    text-align:center;
-    box-shadow:0 25px 50px rgba(255,77,109,.3);
-    position:relative;
-    z-index:2;
+.container {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 25px;
+    padding: 30px 20px;
+    width: 100%;
+    max-width: 550px;
+    text-align: center;
+    box-shadow: 0 25px 50px rgba(255, 77, 109, 0.3);
+    position: relative;
+    z-index: 2;
+    margin: 10px;
 }
 
 /* image */
-.image-display{
-    width:240px;height:240px;
-    margin:0 auto 20px;
-    border-radius:20px;
-    overflow:hidden;
-    border:6px solid #ff4d6d;
+.image-display {
+    width: 220px;
+    height: 220px;
+    margin: 0 auto 20px;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 6px solid #ff4d6d;
 }
-.image-display img{width:100%;height:100%;object-fit:cover}
+
+.image-display img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 
 /* text */
-.question{
-    color:#ff4d6d;
-    font-size:2.3rem;
-    margin-bottom:20px;
+.question {
+    color: #ff4d6d;
+    font-size: 2rem;
+    margin-bottom: 25px;
+    padding: 0 10px;
+    line-height: 1.3;
 }
 
 /* buttons */
-.buttons-container{
-    display:flex;
-    justify-content:center;
-    gap:25px;
-    flex-wrap:wrap;
+.buttons-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+    padding: 0 10px;
 }
 
-.interactive-btn{
-    padding:14px 36px;
-    font-size:1.2rem;
-    border:none;
-    border-radius:15px;
-    cursor:pointer;
-    font-weight:bold;
-    box-shadow:0 10px 20px rgba(0,0,0,.2);
-    transition:transform .2s;
+.interactive-btn {
+    padding: 16px 32px;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s, box-shadow 0.2s;
+    min-width: 140px;
+    min-height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    touch-action: manipulation;
 }
 
-#yesBtn{
-    background:linear-gradient(135deg,#ff4d6d,#ff8fa3);
-    color:#fff;
+#yesBtn {
+    background: linear-gradient(135deg, #ff4d6d, #ff8fa3);
+    color: #fff;
+    position: relative;
+    z-index: 10;
 }
-#yesBtn:hover{transform:scale(1.08)}
 
-#noBtn{
-    background:linear-gradient(135deg,#6c757d,#adb5bd);
-    color:#fff;
-    position:fixed;
+#yesBtn:hover, #yesBtn:active {
+    transform: scale(1.08);
+}
+
+#noBtn {
+    background: linear-gradient(135deg, #6c757d, #adb5bd);
+    color: #fff;
+    position: absolute;
+    z-index: 11;
 }
 
 /* counter */
-.counter{
-    position:absolute;
-    bottom:15px;
-    right:15px;
-    background:#ff4d6d;
-    color:white;
-    padding:6px 14px;
-    border-radius:20px;
-    font-size:.85rem;
+.counter {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    background: #ff4d6d;
+    color: white;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.85rem;
 }
 
 /* pages */
-.success-screen,.letter-screen{display:none}
+.success-screen,
+.letter-screen {
+    display: none;
+}
 
 /* letter */
-.letter{
-    font-size:1.15rem;
-    color:#555;
-    line-height:1.7;
-    white-space:pre-line;
+.letter {
+    font-size: 1.1rem;
+    color: #555;
+    line-height: 1.7;
+    white-space: pre-line;
+    text-align: left;
+    padding: 20px;
+    background: rgba(255, 245, 245, 0.7);
+    border-radius: 15px;
+    margin: 20px 0;
+    max-height: 300px;
+    overflow-y: auto;
 }
 
 /* footer */
-.footer{
-    margin-top:20px;
-    font-size:.9rem;
-    color:#ff4d6d;
-    font-weight:bold;
+.footer {
+    margin-top: 20px;
+    font-size: 0.9rem;
+    color: #ff4d6d;
+    font-weight: bold;
 }
 
 /* hearts */
-.heart{
-    position:fixed;
-    font-size:1.5rem;
-    animation:rise 4s linear forwards;
-}
-@keyframes rise{
-    0%{transform:translateY(0);opacity:1}
-    100%{transform:translateY(-100vh);opacity:0}
+.heart {
+    position: fixed;
+    font-size: 1.5rem;
+    animation: rise 4s linear forwards;
+    pointer-events: none;
+    z-index: 3;
 }
 
-/* mobile */
-@media(max-width:480px){
-    .question{font-size:1.9rem}
-    .image-display{width:200px;height:200px}
-    .interactive-btn{width:100%}
+@keyframes rise {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100vh);
+        opacity: 0;
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container {
+        padding: 25px 15px;
+        border-radius: 20px;
+    }
+    
+    .image-display {
+        width: 200px;
+        height: 200px;
+    }
+    
+    .question {
+        font-size: 1.8rem;
+    }
+    
+    .interactive-btn {
+        padding: 14px 28px;
+        font-size: 1rem;
+        min-width: 130px;
+    }
+    
+    .letter {
+        font-size: 1rem;
+        max-height: 250px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 5px;
+    }
+    
+    .container {
+        padding: 20px 15px;
+        margin: 5px;
+        border-radius: 18px;
+    }
+    
+    .image-display {
+        width: 180px;
+        height: 180px;
+        border-width: 5px;
+    }
+    
+    .question {
+        font-size: 1.6rem;
+        margin-bottom: 20px;
+    }
+    
+    .buttons-container {
+        gap: 15px;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .interactive-btn {
+        width: 90%;
+        max-width: 250px;
+        padding: 15px 20px;
+    }
+    
+    .letter {
+        font-size: 0.95rem;
+        padding: 15px;
+        max-height: 220px;
+    }
+    
+    .counter {
+        font-size: 0.8rem;
+        padding: 5px 12px;
+        bottom: 10px;
+        right: 10px;
+    }
+}
+
+/* Extra small devices */
+@media (max-width: 350px) {
+    .image-display {
+        width: 160px;
+        height: 160px;
+    }
+    
+    .question {
+        font-size: 1.4rem;
+    }
+    
+    .interactive-btn {
+        font-size: 0.95rem;
+        padding: 12px 18px;
+    }
+}
+
+/* Prevent text selection */
+.no-select {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 </style>
 </head>
 
-<body>
+<body class="no-select">
 
 <div class="particles" id="particles"></div>
 
 <div class="container">
+    <!-- ASK -->
+    <div id="askScreen">
+        <div class="image-display">
+            <img src="pic1.png" id="mainImage" alt="Our picture">
+        </div>
 
-<!-- ASK -->
-<div id="askScreen">
-    <div class="image-display">
-        <img src="pic1.png" id="mainImage">
+        <h1 class="question">Do you love me? 🥺</h1>
+
+        <div class="buttons-container">
+            <button class="interactive-btn" id="yesBtn">YES ❤️</button>
+            <button class="interactive-btn" id="noBtn">NO 😶</button>
+        </div>
+
+        <div class="counter">
+            <span id="attempts">0 tries</span>
+        </div>
     </div>
 
-    <h1 class="question">Do you love me? 🥺</h1>
-
-    <div class="buttons-container">
-        <button class="interactive-btn" id="yesBtn">YES ❤️</button>
-        <button class="interactive-btn" id="noBtn">NO 😶</button>
+    <!-- SUCCESS -->
+    <div class="success-screen" id="successScreen">
+        <div class="image-display">
+            <img src="pic2.gif" alt="Celebration">
+        </div>
+        <h1 class="question">I KNEW IT! 😍❤️</h1>
+        <p style="margin-bottom: 20px; color: #666; font-size: 1.1rem;">
+            You just made my heart smile 💖
+        </p>
+        <button class="interactive-btn" id="openLetter">Open Letter 💌</button>
     </div>
 
-    <div class="counter">
-        <span id="attempts">0 tries</span>
+    <!-- LETTER -->
+    <div class="letter-screen" id="letterScreen">
+        <h1 class="question">For You ❤️</h1>
+
+        <div class="letter" id="letterText"></div>
+
+        <button class="interactive-btn" style="margin-top: 20px; background: linear-gradient(135deg, #4d79ff, #8fa3ff);"
+                onclick="playAgain()">
+            🔁 Play Again
+        </button>
+
+        <div class="footer">Made by: Subash Chand</div>
     </div>
-</div>
-
-<!-- SUCCESS -->
-<div class="success-screen" id="successScreen">
-    <div class="image-display">
-        <img src="pic2.gif">
-    </div>
-    <h1 class="question">I KNEW IT! 😍❤️</h1>
-    <p>You just made my heart smile 💖</p>
-    <button class="interactive-btn" id="openLetter">Open Letter 💌</button>
-</div>
-
-<!-- LETTER -->
-<div class="letter-screen" id="letterScreen">
-    <h1 class="question">For You ❤️</h1>
-
-    <div class="letter" id="letterText"></div>
-
-    <button class="interactive-btn" style="margin-top:20px"
-            onclick="playAgain()">
-        🔁 Play Again
-    </button>
-
-    <div class="footer">Made by: Subash Chand</div>
-</div>
-
 </div>
 
 <script>
-/* particles */
-const particles=document.getElementById("particles");
-for(let i=0;i<40;i++){
-    const p=document.createElement("div");
-    p.className="particle";
-    p.style.left=Math.random()*100+"vw";
-    p.style.animationDelay=Math.random()*5+"s";
+// Initialize particles
+const particles = document.getElementById("particles");
+const particleCount = window.innerWidth < 480 ? 25 : 40;
+
+for (let i = 0; i < particleCount; i++) {
+    const p = document.createElement("div");
+    p.className = "particle";
+    p.style.left = Math.random() * 100 + "vw";
+    p.style.animationDelay = Math.random() * 5 + "s";
+    p.style.width = (Math.random() * 4 + 4) + "px";
+    p.style.height = p.style.width;
     particles.appendChild(p);
 }
 
-/* elements */
-const noBtn=document.getElementById("noBtn");
-const yesBtn=document.getElementById("yesBtn");
-const counter=document.getElementById("attempts");
-let attempts=0;
+// Elements
+const noBtn = document.getElementById("noBtn");
+const yesBtn = document.getElementById("yesBtn");
+const counter = document.getElementById("attempts");
+let attempts = 0;
+let isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
-/* NO button move */
-function moveNoButton(){
+// Set initial position for NO button
+noBtn.style.position = "absolute";
+noBtn.style.left = "calc(50% + 80px)";
+noBtn.style.top = "auto";
+
+// Move NO button function
+function moveNoButton(e) {
+    if (e.type === 'touchstart') {
+        e.preventDefault();
+    }
+    
     attempts++;
-    counter.textContent=attempts+" tries";
+    counter.textContent = attempts + (attempts === 1 ? " try" : " tries");
 
-    const rect=noBtn.getBoundingClientRect();
-    const pad=20;
-    const maxX=window.innerWidth-rect.width-pad;
-    const maxY=window.innerHeight-rect.height-pad;
-
-    noBtn.style.left=Math.random()*maxX+"px";
-    noBtn.style.top=Math.random()*maxY+"px";
+    const container = document.querySelector('.container');
+    const containerRect = container.getBoundingClientRect();
+    
+    // Calculate maximum boundaries within container
+    const maxX = containerRect.width - noBtn.offsetWidth - 20;
+    const maxY = containerRect.height - noBtn.offsetHeight - 20;
+    
+    // Generate random position within container
+    const newX = Math.random() * maxX;
+    const newY = Math.random() * maxY;
+    
+    // Position relative to container
+    noBtn.style.left = newX + "px";
+    noBtn.style.top = newY + "px";
+    
+    // Update button text for fun
+    if (attempts > 5) {
+        noBtn.innerHTML = "Really? 😢";
+    }
+    if (attempts > 10) {
+        noBtn.innerHTML = "Please? 🥺";
+    }
+    if (attempts > 15) {
+        noBtn.innerHTML = "Just say YES! 😭";
+    }
+    
+    // Add a little shake effect
+    noBtn.style.transform = "translate(-50%, -50%) scale(0.95)";
+    setTimeout(() => {
+        noBtn.style.transform = "translate(-50%, -50%) scale(1)";
+    }, 150);
 }
 
-/* events */
-noBtn.addEventListener("mouseenter",moveNoButton);
-noBtn.addEventListener("click",moveNoButton);
-noBtn.addEventListener("touchstart",moveNoButton);
+// Event listeners for NO button
+if (isMobile) {
+    noBtn.addEventListener('touchstart', moveNoButton, { passive: false });
+    // Prevent long press context menu on mobile
+    noBtn.addEventListener('contextmenu', e => e.preventDefault());
+} else {
+    noBtn.addEventListener('mouseenter', moveNoButton);
+    noBtn.addEventListener('click', moveNoButton);
+}
 
-yesBtn.onclick=()=>{
-    document.getElementById("askScreen").style.display="none";
-    document.getElementById("successScreen").style.display="block";
-    hearts();
+// YES button click
+yesBtn.onclick = () => {
+    document.getElementById("askScreen").style.display = "none";
+    document.getElementById("successScreen").style.display = "block";
+    createHearts();
+    
+    // Play a subtle sound (optional) or vibration on mobile
+    if (isMobile && navigator.vibrate) {
+        navigator.vibrate([100, 50, 100]);
+    }
 };
 
-/* letter */
-document.getElementById("openLetter").onclick=()=>{
-    document.getElementById("successScreen").style.display="none";
-    document.getElementById("letterScreen").style.display="block";
+// Open letter
+document.getElementById("openLetter").onclick = () => {
+    document.getElementById("successScreen").style.display = "none";
+    document.getElementById("letterScreen").style.display = "block";
     typeLetter();
 };
 
-const letterText=`From the moment you came into my life,
+// Letter text
+const letterText = `From the moment you came into my life,
 everything slowly started to feel warmer and brighter.
 
 Your smile became my comfort,
@@ -263,36 +473,53 @@ and for loving me the way you do.
 
 Good night my janu baby Elisha 💕`;
 
-let i=0;
-function typeLetter(){
-    if(i<letterText.length){
-        document.getElementById("letterText").textContent+=letterText.charAt(i);
-        i++;
-        setTimeout(typeLetter,40);
+let letterIndex = 0;
+function typeLetter() {
+    if (letterIndex < letterText.length) {
+        document.getElementById("letterText").textContent += letterText.charAt(letterIndex);
+        letterIndex++;
+        setTimeout(typeLetter, 40);
     }
 }
 
-/* hearts */
-function hearts(){
-    setInterval(()=>{
-        const h=document.createElement("div");
-        h.className="heart";
-        h.innerHTML="❤️";
-        h.style.left=Math.random()*100+"vw";
-        h.style.bottom="0";
+// Create hearts animation
+function createHearts() {
+    const heartInterval = setInterval(() => {
+        const h = document.createElement("div");
+        h.className = "heart";
+        h.innerHTML = "❤️";
+        h.style.left = Math.random() * 100 + "vw";
+        h.style.fontSize = (Math.random() * 20 + 20) + "px";
+        h.style.opacity = Math.random() * 0.5 + 0.5;
         document.body.appendChild(h);
-        setTimeout(()=>h.remove(),4000);
-    },500);
+        setTimeout(() => h.remove(), 4000);
+    }, 300);
+    
+    // Stop hearts after 10 seconds
+    setTimeout(() => clearInterval(heartInterval), 10000);
 }
 
-/* play again */
-function playAgain(){
+// Play again function
+function playAgain() {
     location.reload();
 }
 
-/* fallback */
-mainImage.onerror=()=>mainImage.src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e";
-</script>
+// Image fallback
+const mainImage = document.getElementById("mainImage");
+mainImage.onerror = () => {
+    mainImage.src = "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80";
+    mainImage.alt = "Placeholder image";
+};
 
+// Prevent zoom on double-tap (iOS)
+let lastTouchEnd = 0;
+document.addEventListener('touchend', function(event) {
+    const now = (new Date()).getTime();
+    if (now - lastTouchEnd <= 300) {
+        event.preventDefault();
+    }
+    lastTouchEnd = now;
+}, false);
+</script>
 </body>
 </html>
